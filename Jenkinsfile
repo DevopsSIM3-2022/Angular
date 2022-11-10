@@ -13,7 +13,7 @@ pipeline{
 
         stage('Build : From dockerfile') {
             steps{
-                	sh "docker build --rm -f angular/Dockerfile -t angular:v1 angular"
+                	sh "docker build --rm -f Dockerfile -t angular:v1 angular"
             }
         }
 
