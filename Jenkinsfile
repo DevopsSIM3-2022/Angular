@@ -1,11 +1,14 @@
 pipeline{
-    agent {
-        dockerfile true
-    }
-    
-    stages {
+    agent any
 
-        stage('Getting project from Git') {
+    tools {
+        maven 'M2_HOME'
+    }
+
+
+	stages {
+
+    stage('Getting project from Git') {
             steps{
       			checkout([$class: 'GitSCM', branches: [[name: '*/Aziz']],
 			extensions: [],
@@ -13,28 +16,25 @@ pipeline{
             }
         }
 
-        stage('Build : From dockerfile') {
+
+        stage('initialising the project') {
             steps{
-                script {
-                	sh "docker build --rm -f ./Dockerfile -t angular:v1"
-                }
+                sh "npm install"
             }
         }
 
-
-        stage('Run : docker image') {
+        stage('Artifact Construction') {
             steps{
-                	sh "docker run --rm -d -p 80:80 angular:v1"
+                sh "ng build"
             }
         }
 
-
-
+       
 
         stage('Build Docker Image') {
                       steps {
                           script {
-                            sh 'docker build -t status404/Angular-app:latest .'
+                            sh 'docker build -t status404/angular-app:latest .'
                           }
                       }
                   }
@@ -47,17 +47,18 @@ pipeline{
 	    
 	    stage('Push Docker Image') {
                     steps {
-                        sh 'docker push status404/Angular:latest'
+                        sh 'docker push status404/angular-app:latest'
                         }
 		}
-		   
-     
-    }
-	    
-    post {
-        always {
-            cleanWs()
-        }
-    }
-	
+
+        stage('Run Angular Container') {
+                 steps {
+                    script {
+                        sh 'docker compose up -d'
+                        }
+                      }
+                  }
+
+}
+
 }
