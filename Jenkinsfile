@@ -54,7 +54,7 @@ pipeline{
         stage('Run Angular Container') {
                  steps {
                     script {
-                        sh 'docker compose up -d'
+                        sh 'docker-compose up -d'
                         }
                       }
                   }
