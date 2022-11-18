@@ -12,15 +12,15 @@ export class StockService {
   constructor(private httpClient: HttpClient) { }
 
   getAllStocks() {
-    return this.httpClient.get(`${this.API_URL}/retrieve-all-stocks`)
+    return this.httpClient.get(`http://192.168.1.31:8089/SpringMVC/stock/retrieve-all-stocks`)
   }
   addStock(stock : any) {
-    return this.httpClient.post(`${this.API_URL}/add-stock`, stock)
+    return this.httpClient.post(`http://192.168.1.31:8089/SpringMVC/stock/add-stock`, stock)
   }
   editStock(stock : any){
-    return this.httpClient.put(`${this.API_URL}/modify-stock`, stock)
+    return this.httpClient.put(`http://192.168.1.31:8089/SpringMVC/stock/modify-stock`, stock)
   }
   deleteStock(idStock : any){
-    return  this.httpClient.delete(`${this.API_URL}/remove-stock/${idStock}`)
+    return  this.httpClient.delete(`http://192.168.1.31:8089/SpringMVC/stock/remove-stock/${idStock}`)
   }
 }
