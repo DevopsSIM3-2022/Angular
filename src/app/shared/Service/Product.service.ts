@@ -6,11 +6,11 @@ import { HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class ProductService {
-  readonly API_URL = 'http://172.20.10.5:4200/SpringMVC/produit';
+  readonly API_URL = 'http://172.20.10.5:8089/SpringMVC/produit';
 
   constructor(private httpClient: HttpClient) { }
   getAllProducts() {
-    return this.httpClient.get(`${this.API_URL}/retrieve-all-produits`)
+    return this.httpClient.get(`http://172.20.10.5:8089/SpringMVC/produit/retrieve-all-produits`)
   }
   addProduct(product : any) {
     return this.httpClient.post(`${this.API_URL}/add-produit`, product)
