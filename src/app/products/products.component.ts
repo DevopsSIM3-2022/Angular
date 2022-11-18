@@ -33,7 +33,7 @@ export class ProductsComponent implements OnInit {
   }
 
   getAllProducts() {
-    this.productService.getAllProducts().subscribe(res => this.listProducts = res)
+    this.productService.getAllProducts()
   }
 
   addProduct(p: any) {
